@@ -46,6 +46,11 @@ def delete(todo_id):
     return redirect(url_for('index'))
 
 
+@app.errorhandler(404)
+def not_found(error):
+    return '<h1>找不到網頁</h1>', 404
+
+
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True)
