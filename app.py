@@ -13,6 +13,7 @@ bcrypt = Bcrypt(app)
 app.secret_key = os.urandom(24)
 app.permanent_session_lifetime = timedelta(days=1)
 
+
 # path to database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -75,10 +76,6 @@ def delete(todo_id):
     return redirect(url_for('index'))
 
 
-@app.errorhandler(404)
-def not_found(error):
-    return '<h1>找不到網頁</h1>', 404
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -131,6 +128,17 @@ def register():
 def logout():
     session.clear()
     return redirect(url_for('login'))
+
+
+# error handler
+@app.errorhandler(404)
+def not_found(error):
+    return '<h1>Not Found</h1>', 404
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return '<h1>Internal Server Error</h1>', 500
 
 
 if __name__ == "__main__":
