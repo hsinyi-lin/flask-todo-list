@@ -1,6 +1,7 @@
 from flask import request, Blueprint, session, redirect, flash, url_for, render_template
 from flask_bcrypt import Bcrypt
 
+from utils.forms import LoginForm, RegisterForm
 from utils.models import db, User
 
 auth = Blueprint('auth', __name__)
@@ -10,7 +11,8 @@ bcrypt = Bcrypt()
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return render_template('login_form.html')
+        return render_template('users/login_form.html', form=LoginForm())
+
     username = request.form['username']
     password = request.form['password']
 
@@ -32,7 +34,7 @@ def login():
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
-        return render_template('register_form.html')
+        return render_template('users/register_form.html', form=RegisterForm())
 
     username = request.form['username']
     password1 = request.form['password1']

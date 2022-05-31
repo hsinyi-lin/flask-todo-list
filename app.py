@@ -2,6 +2,7 @@ import os
 from datetime import timedelta
 
 from flask import Flask
+from flask_bootstrap import Bootstrap
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 
@@ -11,6 +12,8 @@ from views.to_do import to_do
 
 app = Flask(__name__)
 
+bootstrap = Bootstrap(app)
+
 # session settings
 app.secret_key = os.urandom(24)
 app.permanent_session_lifetime = timedelta(days=1)
@@ -19,6 +22,7 @@ app.permanent_session_lifetime = timedelta(days=1)
 # path to database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 db.init_app(app)
 migrate = Migrate(app, db)

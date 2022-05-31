@@ -1,4 +1,4 @@
-# todo_list
+# todo
 from utils.decorators import login_required
 from flask import Blueprint, render_template, request, url_for, redirect
 
@@ -11,7 +11,7 @@ to_do = Blueprint('to_do', __name__)
 @login_required
 def index():
     todo_list = Todo.query.all()
-    return render_template('todo.html', todo_list=todo_list)
+    return render_template('todo/index.html', todo_list=todo_list)
 
 
 @to_do.route('/add', methods=['POST'])

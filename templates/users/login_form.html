@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-4 offset-4">
+            <h2>登入</h2>
+            <hr>
+            <a href="/register" class="float-right">還沒有帳號嗎？</a>
+            <form role="form" action="/login" method="post">
+                {{ form.csrf_token }}
+                {{ wtf.quick_form(form) }}
+            </form>
+        </div>
+    </div>
+{% endblock %}
