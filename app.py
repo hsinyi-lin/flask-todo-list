@@ -14,13 +14,15 @@ app = Flask(__name__)
 
 bootstrap = Bootstrap(app)
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 # session settings
 app.secret_key = os.urandom(24)
 app.permanent_session_lifetime = timedelta(days=1)
 
 
 # path to database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
